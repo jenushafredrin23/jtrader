@@ -1,0 +1,18 @@
+{
+	"project_info": {
+		"id": "YOUR_PROJECT_ID",
+		"name": "JTraders"
+	},
+	"functions": {
+		"targets": [
+			"jtraders_function"
+		],
+		"ignore": [
+			"node_modules",
+			".catalyst"
+		]
+	},
+	"client": {
+		"source": "./"
+	}
+}

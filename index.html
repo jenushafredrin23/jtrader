@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J Traders - Premium Trading Education & Mentorship</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>J Traders</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#mentorship">Mentorship</a></li>
+                <li><a href="#testimonials">Success Stories</a></li>
+                <li><a href="#" class="auth-btn" onclick="openLoginModal()">Login</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="candlestick-bg"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Master Trading. Build Wealth. Create Freedom.</h1>
+            <p class="hero-subtitle">Join Elite Traders Learning Exclusive Strategies & Live Market Mentorship</p>
+            <div class="hero-cta">
+                <button class="cta-btn primary" onclick="scrollToSection('#pricing')">Start Your Journey</button>
+                <button class="cta-btn secondary">Watch Demo</button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <h3>15K+</h3>
+                    <p>Active Traders</p>
+                </div>
+                <div class="stat">
+                    <h3>₹400Cr+</h3>
+                    <p>Client Profits</p>
+                </div>
+                <div class="stat">
+                    <h3>98%</h3>
+                    <p>Success Rate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trading Courses Section -->
+    <section id="courses" class="courses-section">
+        <div class="section-header">
+            <h2>Professional Trading Courses</h2>
+            <p>Comprehensive curriculum designed for every trading level</p>
+        </div>
+        <div class="courses-grid">
+            <div class="course-card">
+                <div class="course-badge">Beginner</div>
+                <div class="course-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3>Foundation Trading</h3>
+                <p>Learn market fundamentals, technical analysis, and basic trading strategies.</p>
+                <ul class="course-features">
+                    <li><i class="fas fa-check"></i> 12 Video Modules</li>
+                    <li><i class="fas fa-check"></i> Live Q&A Sessions</li>
+                    <li><i class="fas fa-check"></i> Trading Workbook</li>
+                    <li><i class="fas fa-check"></i> Community Access</li>
+                </ul>
+                <div class="course-price">₹1,000</div>
+                <button class="course-btn" onclick="selectCourse('Foundation Trading', 1000)">Enroll Now</button>
+            </div>
+
+            <div class="course-card featured">
+                <div class="course-badge premium">Most Popular</div>
+                <div class="course-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h3>Advanced Strategy Mastery</h3>
+                <p>Master advanced trading strategies, risk management, and portfolio optimization.</p>
+                <ul class="course-features">
+                    <li><i class="fas fa-check"></i> 24 Video Modules</li>
+                    <li><i class="fas fa-check"></i> Weekly Live Markets</li>
+                    <li><i class="fas fa-check"></i> 1-on-1 Coaching</li>
+                    <li><i class="fas fa-check"></i> Private Discord Group</li>
+                </ul>
+                <div class="course-price">₹2,000</div>
+                <button class="course-btn featured-btn" onclick="selectCourse('Advanced Strategy Mastery', 2000)">Enroll Now</button>
+            </div>
+
+            <div class="course-card">
+                <div class="course-badge">Advanced</div>
+                <div class="course-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3>Elite Trading System</h3>
+                <p>Complete trading system with algorithmic strategies and advanced market analysis.</p>
+                <ul class="course-features">
+                    <li><i class="fas fa-check"></i> 36 Video Modules</li>
+                    <li><i class="fas fa-check"></i> Daily Live Trading</li>
+                    <li><i class="fas fa-check"></i> Trading Bot Access</li>
+                    <li><i class="fas fa-check"></i> Lifetime Updates</li>
+                </ul>
+                <div class="course-price">₹3,000</div>
+                <button class="course-btn" onclick="selectCourse('Elite Trading System', 3000)">Enroll Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Elite Benefits Section -->
+    <section class="elite-advantage">
+        <div class="section-header">
+            <h2>The Elite Advantage</h2>
+            <p>Why retail traders fail and how our students consistently dominate the markets</p>
+        </div>
+        <div class="risk-content">
+            <div class="risk-item">
+                <div class="risk-icon"><i class="fas fa-microchip"></i></div>
+                <h3>Institutional Data</h3>
+                <p>Access the same data feeds used by hedge funds and institutional desk traders.</p>
+            </div>
+            <div class="risk-item">
+                <div class="risk-icon"><i class="fas fa-vault"></i></div>
+                <h3>Capital Preservation</h3>
+                <p>Our proprietary risk-first framework ensures you never lose more than 1% of your equity.</p>
+            </div>
+            <div class="risk-item">
+                <div class="risk-icon"><i class="fas fa-network-wired"></i></div>
+                <h3>Private Network</h3>
+                <p>Connect with a global circle of wealthy investors and professional fund managers.</p>
+            </div>
+            <div class="risk-item">
+                <div class="risk-icon"><i class="fas fa-gem"></i></div>
+                <h3>Luxury Lifestyle</h3>
+                <p>We don't just teach trading; we teach wealth management and financial freedom.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recorded Strategy Vault -->
+    <section class="live-sessions">
+        <div class="section-header">
+            <h2>Recorded Strategy Vault</h2>
+            <p>On-demand access to premium trading analysis and historical market breakdowns</p>
+        </div>
+        <div class="sessions-grid">
+            <div class="session-card">
+                <div class="session-time">
+                    <i class="fas fa-play-circle"></i> Instant Access
+                </div>
+                <h3>Morning Market Analysis</h3>
+                <p>Daily market setup, trend analysis, and entry/exit opportunities</p>
+                <div class="session-features">
+                    <span><i class="fas fa-video"></i> Live Video</span>
+                    <span><i class="fas fa-chat"></i> Q&A Chat</span>
+                    <span><i class="fas fa-chart-line"></i> Trade Alerts</span>
+                </div>
+            </div>
+
+            <div class="session-card">
+                <div class="session-time">
+                    <i class="fas fa-play-circle"></i> Instant Access
+                </div>
+                <h3>Strategy Implementation</h3>
+                <p>Apply advanced strategies with live broker integration and real trade examples</p>
+                <div class="session-features">
+                    <span><i class="fas fa-desktop"></i> Screen Share</span>
+                    <span><i class="fas fa-hands-helping"></i> Live Support</span>
+                    <span><i class="fas fa-award"></i> Certifications</span>
+                </div>
+            </div>
+
+            <div class="session-card">
+                <div class="session-time">
+                    <i class="fas fa-clock"></i> Friday - 4:00 PM EST
+                </div>
+                <h3>Weekly Recap & Planning</h3>
+                <p>Review the week's trades, celebrate wins, and plan for next week</p>
+                <div class="session-features">
+                    <span><i class="fas fa-book"></i> Trade Journal</span>
+                    <span><i class="fas fa-network-wired"></i> Networking</span>
+                    <span><i class="fas fa-trophy"></i> Leaderboard</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Risk Management Section -->
+    <section class="risk-management">
+        <div class="section-header">
+            <h2>Professional Risk Management</h2>
+            <p>Protect your capital while maximizing profits</p>
+        </div>
+        <div class="risk-content">
+            <div class="risk-item">
+                <div class="risk-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Position Sizing</h3>
+                <p>Calculate optimal position sizes based on risk tolerance and account size</p>
+            </div>
+            <div class="risk-item">
+                <div class="risk-icon">
+                    <i class="fas fa-line-chart"></i>
+                </div>
+                <h3>Stop Loss Strategy</h3>
+                <p>Master stop loss placement and take profit targets for maximum returns</p>
+            </div>
+            <div class="risk-item">
+                <div class="risk-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h3>Portfolio Allocation</h3>
+                <p>Diversify your portfolio with intelligent asset allocation strategies</p>
+            </div>
+            <div class="risk-item">
+                <div class="risk-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Psychology Control</h3>
+                <p>Eliminate emotions and develop disciplined trading habits for consistency</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Mentorship -->
+    <section id="mentorship" class="mentorship">
+        <div class="mentorship-container">
+            <div class="mentorship-content">
+                <h2>1-on-1 Premium Mentorship</h2>
+                <p class="mentorship-subtitle">Get personalized guidance from certified trading experts</p>
+                <ul class="mentorship-features">
+                    <li><i class="fas fa-star"></i> Personalized Trading Plans</li>
+                    <li><i class="fas fa-star"></i> Weekly Strategy Sessions</li>
+                    <li><i class="fas fa-star"></i> Trade Analysis & Feedback</li>
+                    <li><i class="fas fa-star"></i> Priority Email Support</li>
+                    <li><i class="fas fa-star"></i> Exclusive Market Alerts</li>
+                    <li><i class="fas fa-star"></i> Career Development Path</li>
+                </ul>
+                <button class="cta-btn primary" onclick="selectCourse('Premium Mentorship', 5000)">Book Your Mentor</button>
+            </div>
+            <div class="mentorship-image">
+                <div class="mentor-card">
+                    <div class="mentor-avatar"></div>
+                    <h4>Expert Traders</h4>
+                    <p>20+ Years Combined Experience</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials & Success Stories -->
+    <section id="testimonials" class="testimonials">
+        <div class="section-header">
+            <h2>Success Stories & Testimonials</h2>
+            <p>Real results from real traders</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"I went from losing money to consistently profitable in 3 months. The strategies taught here are game-changing!"</p>
+                <div class="testimonial-author">
+                    <h4>Michael Chen</h4>
+                    <p>₹3.5L Monthly Profits</p>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"The mentorship program transformed my trading mindset. I'm now trading like a professional, not a gambler."</p>
+                <div class="testimonial-author">
+                    <h4>Sarah Williams</h4>
+                    <p>₹5L Monthly Profits</p>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"Best investment I've made. The ROI from these courses paid for itself within the first month of trading."</p>
+                <div class="testimonial-author">
+                    <h4>David Johnson</h4>
+                    <p>₹3L Monthly Profits</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing & Payment Section -->
+    <section id="pricing" class="pricing">
+        <div class="section-header">
+            <h2>Investment in Your Future</h2>
+            <p>Start your trading journey today with flexible payment options</p>
+        </div>
+        <div class="pricing-table">
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>Foundation</th>
+                    <th>Advanced</th>
+                    <th>Elite</th>
+                </tr>
+                <tr>
+                    <td>Video Modules</td>
+                    <td>12</td>
+                    <td>24</td>
+                    <td>36</td>
+                </tr>
+                <tr>
+                    <td>Recorded Vault</td>
+                    <td>Foundation</td>
+                    <td>Advanced</td>
+                    <td>Elite</td>
+                </tr>
+                <tr>
+                    <td>1-on-1 Coaching</td>
+                    <td>-</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>Trading Bot Access</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>Community Access</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>Course Duration</td>
+                    <td>6 Months</td>
+                    <td>6 Months</td>
+                    <td>6 Months</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <!-- Trust Badges -->
+    <section class="trust-section">
+        <div class="trust-container">
+            <div class="trust-badge">
+                <i class="fas fa-lock"></i>
+                <h3>Secure Payments</h3>
+                <p>SSL Encrypted - Bank Grade Security</p>
+            </div>
+            <div class="trust-badge">
+                <i class="fas fa-certificate"></i>
+                <h3>Certified Instructors</h3>
+                <p>Industry-Recognized Trading Certifications</p>
+            </div>
+            <div class="trust-badge">
+                <i class="fas fa-handshake"></i>
+                <h3>Lifetime Support</h3>
+                <p>24/7 Customer Support & Assistance</p>
+            </div>
+            <div class="trust-badge">
+                <i class="fas fa-chart-line"></i>
+                <h3>Proven Results</h3>
+                <p>Thousands of Successful Traders</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="final-cta">
+        <h2>Ready to Transform Your Trading?</h2>
+        <p>Join thousands of successful traders who've mastered the markets</p>
+        <button class="cta-btn primary large" onclick="scrollToSection('#courses')">Explore Courses Now</button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>J Traders</h4>
+                <p>Premium trading education and mentorship for serious traders</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#mentorship">Mentorship</a></li>
+                    <li><a href="#testimonials">Success Stories</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Disclaimer</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Email: support@jtraders.com</p>
+                <p>Phone: 1-800-TRADERS-1</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 J Traders. All rights reserved. | Disclaimer: Past performance does not guarantee future results.</p>
+        </div>
+    </footer>
+
+    <!-- Catalyst Elite Login Modal -->
+    <div id="loginModal" class="modal catalyst-theme">
+        <div class="modal-content catalyst-card">
+            <div class="catalyst-glow"></div>
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <div class="modal-header">
+                <i class="fas fa-atom catalyst-icon"></i>
+                <h2>CATALYST ELITE</h2>
+                <p>Enterprise Secure Access & Performance Terminal</p>
+            </div>
+            <form onsubmit="handleLogin(event)" class="catalyst-form">
+                <div class="input-group">
+                    <i class="fas fa-fingerprint"></i>
+                    <input type="email" placeholder="Institutional Email" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-shield-halved"></i>
+                    <input type="password" placeholder="Access Protocol" required>
+                </div>
+                <button type="submit" class="btn-catalyst">IGNITE SESSION</button>
+                <div class="modal-footer">
+                    <p>New Operator? <a href="#" onclick="openSignupModal()">Request Clearance</a></p>
+                    <p><i class="fas fa-circle-check"></i> Encrypted Node: TLS 1.3</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content payment-modal">
+            <span class="close" onclick="closePaymentModal()">&times;</span>
+            <h2 id="paymentTitle">Complete Your Purchase</h2>
+            <div class="payment-info">
+                <p id="courseNameDisplay"></p>
+                <p id="coursePriceDisplay"></p>
+            </div>
+            <form onsubmit="processPayment(event)">
+                <input type="text" placeholder="Full Name" id="customerName" required>
+                <input type="email" placeholder="Email Address" id="customerEmail" required>
+                <div id="card-element"></div>
+                <div id="card-errors" role="alert"></div>
+                <button type="submit" class="btn-payment" id="payBtn">Pay Now</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Modal -->
+    <div id="dashboardModal" class="modal">
+        <div class="modal-content dashboard-modal">
+            <span class="close" onclick="closeDashboard()">&times;</span>
+            <h2>My Learning Dashboard</h2>
+            <div class="dashboard-tabs">
+                <button class="tab-btn active" onclick="switchTab('courses-tab')">My Courses</button>
+                <button class="tab-btn" onclick="switchTab('sessions-tab')">Recorded Vault</button>
+                <button class="tab-btn" onclick="switchTab('progress-tab')">Progress</button>
+                <button class="tab-btn" onclick="switchTab('support-tab')">Support</button>
+            </div>
+            <div id="courses-tab" class="tab-content active">
+                <h3>Your Active Courses</h3>
+                <div id="activeCourses"></div>
+                <div class="expiration-warning">
+                    <i class="fas fa-info-circle"></i>
+                    <p id="expirationInfo"></p>
+                </div>
+            </div>
+            <div id="sessions-tab" class="tab-content">
+                <h3>Recorded Strategy Library</h3>
+                <div id="upcomingSessions"></div>
+            </div>
+            <div id="progress-tab" class="tab-content">
+                <h3>Your Learning Progress</h3>
+                <div id="progressContent"></div>
+            </div>
+            <div id="support-tab" class="tab-content">
+                <h3>Need Help?</h3>
+                <p>Email: support@jtraders.com</p>
+                <p>Live Chat Available 24/7</p>
+                <button class="btn-support">Start Live Chat</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

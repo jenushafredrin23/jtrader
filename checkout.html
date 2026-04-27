@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout | J Traders Elite Access</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --success-green: #00d98e;
+            --emerald-glow: rgba(0, 217, 142, 0.2);
+        }
+
+        body {
+            background-color: var(--primary-black);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Background Chart Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png'), 
+                        radial-gradient(circle at 10% 10%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 90%, rgba(0, 217, 142, 0.05) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        .checkout-wrapper {
+            width: 100%;
+            max-width: 1100px;
+            display: grid;
+            grid-template-columns: 1.2fr 1.8fr;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            animation: slideUp 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* Side Summary */
+        .order-summary {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4rem;
+            border-right: 1px solid var(--glass-border);
+        }
+
+        .logo-small {
+            font-family: 'Outfit', sans-serif;
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .course-info h1 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        .price-tag {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--bright-gold);
+            margin: 2rem 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .validity-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Payment Section */
+        .payment-gateway {
+            padding: 4rem;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .gateway-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .secure-tag {
+            color: var(--success-green);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .method-group {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .method-group:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-gold);
+        }
+
+        .method-group.active {
+            border-color: var(--success-green);
+            background: rgba(0, 217, 142, 0.05);
+            box-shadow: 0 0 20px var(--emerald-glow);
+        }
+
+        .method-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .method-title {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .method-title i {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+        }
+
+        .method-group.active .method-title i {
+            color: var(--success-green);
+        }
+
+        .method-logos img {
+            height: 25px;
+            opacity: 0.7;
+            margin-left: 1rem;
+        }
+
+        /* Form Details */
+        .payment-details {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            animation: fadeIn 0.4s ease;
+        }
+
+        .unlock-btn {
+            width: 100%;
+            padding: 1.5rem;
+            background: var(--gold-gradient);
+            border: none;
+            color: var(--primary-black);
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 3rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .unlock-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        .trust-footer {
+            margin-top: 3rem;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            opacity: 0.5;
+        }
+
+        .trust-footer i {
+            font-size: 2rem;
+        }
+
+        @media (max-width: 992px) {
+            .checkout-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .order-summary {
+                padding: 3rem;
+                text-align: center;
+            }
+            .logo-small {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="checkout-wrapper">
+        <div class="order-summary">
+            <div class="logo-small">
+                <i class="fas fa-chart-line"></i>
+                J TRADERS ELITE
+            </div>
+            <div class="course-info">
+                <h1>Elite Trading System</h1>
+                <p style="color: var(--text-silver);">Master Institutional Trading & Wealth Management</p>
+                <div class="validity-badge">6 Months Access Guaranteed</div>
+                <div class="price-tag">₹3,000</div>
+                <ul style="list-style: none; color: var(--text-silver); font-size: 0.9rem; margin-top: 2rem;">
+                    <li style="margin-bottom: 1rem;"><i class="fas fa-check-circle" style="color: var(--success-green); margin-right: 10px;"></i> Advanced Technical Analysis</li>
+                    <li style="margin-bottom: 1rem;"><i class="fas fa-check-circle" style="color: var(--success-green); margin-right: 10px;"></i> Risk Management Framework</li>
+                    <li style="margin-bottom: 1rem;"><i class="fas fa-check-circle" style="color: var(--success-green); margin-right: 10px;"></i> Premium Discord Invitation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="payment-gateway">
+            <div class="gateway-header">
+                <h2>Secure Payment</h2>
+                <div class="secure-tag">
+                    <i class="fas fa-lock"></i>
+                    PCI DSS COMPLIANT
+                </div>
+            </div>
+
+            <div class="payment-methods">
+                <!-- UPI -->
+                <div class="method-group active" onclick="selectMethod(this, 'upi')">
+                    <div class="method-info">
+                        <div class="method-title">
+                            <i class="fas fa-mobile-alt"></i>
+                            <div>
+                                <h4 style="margin: 0;">UPI (Instant)</h4>
+                                <p style="margin: 0; font-size: 0.8rem; color: var(--text-silver);">Google Pay, PhonePe, Paytm</p>
+                            </div>
+                        </div>
+                        <div class="method-logos">
+                            <i class="fab fa-google-pay" style="font-size: 1.5rem;"></i>
+                        </div>
+                    </div>
+                    <div id="upi-details" class="payment-details">
+                        <input type="text" id="upiId" placeholder="yourname@upi" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 1.2rem; width: 100%; color: white; border-radius: 4px;">
+                    </div>
+                </div>
+
+                <!-- Cards -->
+                <div class="method-group" onclick="selectMethod(this, 'card')">
+                    <div class="method-info">
+                        <div class="method-title">
+                            <i class="fas fa-credit-card"></i>
+                            <div>
+                                <h4 style="margin: 0;">Debit / Credit Card</h4>
+                                <p style="margin: 0; font-size: 0.8rem; color: var(--text-silver);">Visa, Mastercard, RuPay</p>
+                            </div>
+                        </div>
+                        <div class="method-logos">
+                            <i class="fab fa-cc-visa"></i>
+                            <i class="fab fa-cc-mastercard"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Net Banking -->
+                <div class="method-group" onclick="selectMethod(this, 'netbanking')">
+                    <div class="method-info">
+                        <div class="method-title">
+                            <i class="fas fa-university"></i>
+                            <div>
+                                <h4 style="margin: 0;">Net Banking</h4>
+                                <p style="margin: 0; font-size: 0.8rem; color: var(--text-silver);">All major Indian banks supported</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="unlock-btn" onclick="executePayment()">Unlock Premium Access Now</button>
+
+            <div class="trust-footer">
+                <i class="fab fa-stripe-s"></i>
+                <i class="fab fa-cc-amex"></i>
+                <i class="fas fa-shield-halved"></i>
+            </div>
+            <p style="text-align: center; color: var(--text-silver); font-size: 0.8rem; margin-top: 2rem;">
+                Your payment information is encrypted and never stored on our servers.
+            </p>
+        </div>
+    </div>
+
+    <!-- Success Loader (Overlay) -->
+    <div id="successOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--primary-black); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+        <div class="success-icon" style="font-size: 5rem; color: var(--success-green); margin-bottom: 2rem; animation: pulse 2s infinite;">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h2 style="color: white; font-size: 2.5rem; font-family: 'Outfit', sans-serif;">PAYMENT SUCCESSFUL</h2>
+        <p style="color: var(--text-silver);">Generating your Elite Access Token...</p>
+    </div>
+
+    <script>
+        // Get URL params for course info
+        const urlParams = new URLSearchParams(window.location.search);
+        const courseName = urlParams.get('course') || 'Elite Trading System';
+        const coursePrice = urlParams.get('price') || '3,000';
+
+        // Update UI with course details
+        document.querySelector('.course-info h1').textContent = courseName;
+        document.querySelector('.price-tag').textContent = '₹' + coursePrice;
+        document.querySelector('.unlock-btn').textContent = 'Unlock Premium Access - ₹' + coursePrice;
+
+        function selectMethod(el, type) {
+            document.querySelectorAll('.method-group').forEach(m => m.classList.remove('active'));
+            el.classList.add('active');
+            
+            // Show details if UPI
+            const upiDetails = document.getElementById('upi-details');
+            if (type === 'upi') {
+                upiDetails.style.display = 'block';
+            } else {
+                upiDetails.style.display = 'none';
+            }
+        }
+
+        function executePayment() {
+            const btn = document.querySelector('.unlock-btn');
+            btn.disabled = true;
+            btn.textContent = 'SECURELY CONNECTING...';
+
+            setTimeout(() => {
+                btn.textContent = 'AUTHORIZING TRANSACTION...';
+                setTimeout(() => {
+                    // Show success
+                    document.getElementById('successOverlay').style.display = 'flex';
+                    
+                    // Save to local storage for the dashboard
+                    const purchaseData = {
+                        courseName: courseName,
+                        coursePrice: coursePrice.replace(',', ''),
+                        purchaseDate: new Date().toISOString(),
+                        expirationDate: calculateExpirationDate(),
+                        accessStatus: 'active',
+                        id: 'TXN_' + Math.random().toString(36).substr(2, 9).toUpperCase()
+                    };
+                    
+                    let courses = JSON.parse(localStorage.getItem('purchasedCourses')) || [];
+                    courses.push(purchaseData);
+                    localStorage.setItem('purchasedCourses', JSON.stringify(courses));
+                    localStorage.setItem('currentUser', JSON.stringify({ name: 'Trader', email: 'student@elite.com' }));
+
+                    setTimeout(() => {
+                        window.location.href = 'index.html?action=dashboard';
+                    }, 3000);
+                }, 2000);
+            }, 1500);
+        }
+
+        function calculateExpirationDate() {
+            const now = new Date();
+            return new Date(now.getFullYear(), now.getMonth() + 6, now.getDate()).toISOString();
+        }
+    </script>
+</body>
+</html>
