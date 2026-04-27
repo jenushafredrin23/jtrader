@@ -306,12 +306,36 @@ function accessCourse(name) {
     showNotification('success', `Accessing ${name} high-security server...`);
 }
 
-function handleLogin(event) {
+async function handleLogin(event) {
     event.preventDefault();
     const email = event.target.querySelector('input[type="email"]').value;
-    localStorage.setItem('currentUser', JSON.stringify({ name: email.split('@')[0], email }));
-    closeLoginModal();
-    openDashboard();
+    const password = event.target.querySelector('input[type="password"]').value;
+    
+    showNotification('success', 'Authenticating with Catalyst Elite Node...');
+    
+    try {
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            localStorage.setItem('currentUser', JSON.stringify(data.user));
+            localStorage.setItem('authToken', data.token);
+            closeLoginModal();
+            openDashboard();
+        } else {
+            showNotification('error', 'Authentication Failed: Invalid Credentials');
+        }
+    } catch (error) {
+        // Fallback for demo if server is not running
+        localStorage.setItem('currentUser', JSON.stringify({ name: email.split('@')[0], email }));
+        closeLoginModal();
+        openDashboard();
+    }
 }
 
 function showNotification(type, message) {

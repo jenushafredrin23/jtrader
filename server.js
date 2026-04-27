@@ -12,9 +12,12 @@
 const express = require('express');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY || 'sk_test_YOUR_SECRET_KEY_HERE');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const app = express();
+
+const JWT_SECRET = process.env.JWT_SECRET || 'CATALYST_ELITE_SECRET_NODE_2024';
 
 // Middleware
 app.use(cors());
@@ -23,7 +26,40 @@ app.use(express.static('.'));
 
 const PORT = process.env.PORT || 5000;
 
-// ==================== PAYMENT ENDPOINTS ====================
+// ==================== AUTHENTICATION MIDDLEWARE ====================
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) return res.status(401).json({ error: 'Access Denied: No Token Provided' });
+
+    jwt.verify(token, JWT_SECRET, (err, user) => {
+        if (err) return res.status(403).json({ error: 'Session Expired or Invalid' });
+        req.user = user;
+        next();
+    });
+}
+
+// ==================== AUTH ENDPOINTS ====================
+app.post('/api/login', (req, res) => {
+    const { email, password } = req.body;
+    
+    // In production, verify against database with bcrypt
+    // For now, we simulate a successful login for any email
+    const user = {
+        email: email,
+        role: 'student',
+        id: 'CAT_' + Math.random().toString(36).substr(2, 9).toUpperCase()
+    };
+
+    const token = jwt.sign(user, JWT_SECRET, { expiresIn: '24h' });
+    
+    res.json({
+        success: true,
+        token: token,
+        user: user
+    });
+});
 
 /**
  * Create Payment Intent
